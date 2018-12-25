@@ -19,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   userDetails;
   friend: string;
   friendsObject: any;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.refreshUserDetails();
