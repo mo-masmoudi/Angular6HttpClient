@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   serverErrorMessages: string;
   userDetails;
   friend: string;
+  friendsObject: any;
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
@@ -65,6 +66,9 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       res => {
         this.userDetails = res["user"];
+        this.friendsObject = this.userDetails.friends.map(({ fullName }) => ({
+          fullName
+        }));
         this.userService.modifiedUser = this.userDetails;
       },
       err => {
@@ -78,7 +82,7 @@ export class UserProfileComponent implements OnInit {
       res => {
         setTimeout(() => (this.showSucessMessage = false), 4000);
         this.addFriend = false;
-        window.location.reload();
+        this.friendsObject.push({ fullName: form.value.fullName });
         M.toast({ html: "Friend added successfully", classes: "rounded" });
       },
       err => {
@@ -101,6 +105,13 @@ export class UserProfileComponent implements OnInit {
         res => {
           this.showSucessMessage = true;
           setTimeout(() => (this.showSucessMessage = false), 4000);
+          let removeIndex = this.friendsObject
+            .map(function(item) {
+              return item.fullName;
+            })
+            .indexOf(deletedFriend.fullName);
+          this.friendsObject.splice(removeIndex, 1);
+          M.toast({ html: "Friend Deleted", classes: "rounded" });
         },
         err => {
           if (err.status === 422) {
@@ -111,6 +122,5 @@ export class UserProfileComponent implements OnInit {
         }
       );
     }
-    window.location.reload();
   }
 }

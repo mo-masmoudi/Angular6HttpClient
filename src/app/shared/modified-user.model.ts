@@ -7,5 +7,3 @@ export class ModifiedUser {
   race: string;
   nourriture: string;
 }
-
-//age / famille / race / nourriture
