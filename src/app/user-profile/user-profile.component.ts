@@ -40,6 +40,7 @@ export class UserProfileComponent implements OnInit {
       res => {
         this.showSucessMessage = true;
         setTimeout(() => (this.showSucessMessage = false), 4000);
+        this.refreshUserDetails();
       },
       err => {
         if (err.status === 422) {
@@ -49,7 +50,7 @@ export class UserProfileComponent implements OnInit {
             "Something went wrong.Please contact admin.";
       }
     );
-    this.refreshUserDetails();
+    
     this.update = false;
     M.toast({
       html: "Alien's details Updated successfully",
@@ -66,10 +67,10 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       res => {
         this.userDetails = res["user"];
+        this.userService.modifiedUser = this.userDetails;
         this.friendsObject = this.userDetails.friends.map(({ fullName }) => ({
           fullName
         }));
-        this.userService.modifiedUser = this.userDetails;
       },
       err => {
         console.log(err);
