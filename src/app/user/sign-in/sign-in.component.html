@@ -17,6 +17,7 @@
     <label class="validation-message">Invalid email address.</label>
   </div>
   <input
+    (keyup)="onKey($event)"
     type="password"
     name="password"
     #password="ngModel"

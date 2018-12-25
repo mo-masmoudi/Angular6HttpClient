@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   userDetails;
   friend: string;
   friendsObject: any;
+  isSingleClick: boolean;
   constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {
@@ -38,7 +39,6 @@ export class UserProfileComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userService.putUser(form.value).subscribe(
       res => {
-        this.showSucessMessage = true;
         setTimeout(() => (this.showSucessMessage = false), 4000);
         this.refreshUserDetails();
       },
@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
             "Something went wrong.Please contact admin.";
       }
     );
-    
+
     this.update = false;
     M.toast({
       html: "Alien's details Updated successfully",
@@ -83,6 +83,7 @@ export class UserProfileComponent implements OnInit {
       res => {
         setTimeout(() => (this.showSucessMessage = false), 4000);
         this.addFriend = false;
+        this.userService.newFriend = "";
         this.friendsObject.push({ fullName: form.value.fullName });
         M.toast({ html: "Friend added successfully", classes: "rounded" });
       },
@@ -104,7 +105,6 @@ export class UserProfileComponent implements OnInit {
     if (confirm("Are you sure to delete this friend ?") == true) {
       this.userService.deleteFriend(deletedFriend).subscribe(
         res => {
-          this.showSucessMessage = true;
           setTimeout(() => (this.showSucessMessage = false), 4000);
           let removeIndex = this.friendsObject
             .map(function(item) {

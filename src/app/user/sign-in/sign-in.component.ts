@@ -11,7 +11,11 @@ import { UserService } from "../../shared/user.service";
   styleUrls: ["./sign-in.component.css"]
 })
 export class SignInComponent implements OnInit {
-  constructor(private userService: UserService, private router: Router, private spinner: NgxSpinnerService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   model = {
     email: "",
@@ -25,6 +29,7 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form.value);
     this.spinner.show();
     this.userService.login(form.value).subscribe(
       res => {
@@ -33,8 +38,14 @@ export class SignInComponent implements OnInit {
         this.router.navigateByUrl("/userprofile");
       },
       err => {
+        this.spinner.hide();
+        this.model.password = "";
         this.serverErrorMessages = err.error.message;
       }
     );
+  }
+
+  onKey(event: KeyboardEvent) {
+    this.serverErrorMessages = "";
   }
 }

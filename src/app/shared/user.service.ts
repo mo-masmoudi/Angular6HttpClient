@@ -35,6 +35,8 @@ export class UserService {
     fullName: ""
   };
 
+  newFriend: string;
+
   noAuthHeader = { headers: new HttpHeaders({ NoAuth: "True" }) };
 
   constructor(private http: HttpClient) {}
