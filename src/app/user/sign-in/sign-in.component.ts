@@ -29,7 +29,6 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.spinner.show();
     this.userService.login(form.value).subscribe(
       res => {

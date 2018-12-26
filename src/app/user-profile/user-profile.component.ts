@@ -2,6 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "../shared/user.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import {
+  ScrollToService,
+  ScrollToConfigOptions
+} from "@nicky-lenaers/ngx-scroll-to";
 
 declare var M: any;
 
@@ -20,7 +24,11 @@ export class UserProfileComponent implements OnInit {
   friend: string;
   friendsObject: any;
   isSingleClick: boolean;
-  constructor(public userService: UserService, private router: Router) {}
+  constructor(
+    public userService: UserService,
+    private _scrollToService: ScrollToService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.refreshUserDetails();
@@ -29,11 +37,19 @@ export class UserProfileComponent implements OnInit {
   onUpdate() {
     this.addFriend = false;
     this.update = true;
+    const config: ScrollToConfigOptions = {
+      target: "updateFormDetails"
+    };
+    this._scrollToService.scrollTo(config);
   }
 
   onAddFriend() {
     this.update = false;
     this.addFriend = true;
+    const config: ScrollToConfigOptions = {
+      target: "addFriendForm"
+    };
+    this._scrollToService.scrollTo(config);
   }
 
   onSubmit(form: NgForm) {

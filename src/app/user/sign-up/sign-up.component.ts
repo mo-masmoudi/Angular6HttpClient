@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { UserService } from "../../shared/user.service";
 
@@ -13,23 +14,31 @@ export class SignUpComponent implements OnInit {
   showSucessMessage: boolean;
   serverErrorMessages: string;
 
-  constructor(public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {}
 
   onSubmit(form: NgForm) {
+    this.spinner.show();
     this.userService.postUser(form.value).subscribe(
       res => {
+        this.spinner.hide();
         this.showSucessMessage = true;
         setTimeout(() => (this.showSucessMessage = false), 4000);
         this.resetForm(form);
       },
       err => {
         if (err.status === 422) {
+          this.spinner.hide();
           this.serverErrorMessages = err.error.join("<br/>");
-        } else
+        } else {
+          this.spinner.hide();
           this.serverErrorMessages =
             "Something went wrong.Please contact admin.";
+        }
       }
     );
   }

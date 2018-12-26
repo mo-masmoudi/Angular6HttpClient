@@ -17,6 +17,7 @@ import { UserService } from "./shared/user.service";
 import { AuthGuard } from "./auth/auth.guard";
 import { AuthInterceptor } from "./auth/auth.interceptor";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ScrollToModule.forRoot()
   ],
   providers: [
     {
