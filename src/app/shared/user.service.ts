@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 import { User } from "./user.model";
 import { ModifiedUser } from "./modified-user.model";
 import { FriendModel } from "./friend-model.model";
+import { NewFriendModel } from "./newFriend.model";
 
 @Injectable({
   providedIn: "root"
@@ -36,6 +37,13 @@ export class UserService {
   };
 
   newFriend: string;
+
+  newFriendModel: NewFriendModel = {
+    _id: "",
+    fullName: "",
+    email: "",
+    password: ""
+  }
 
   noAuthHeader = { headers: new HttpHeaders({ NoAuth: "True" }) };
 
@@ -70,9 +78,11 @@ export class UserService {
     );
   }
 
-  addFriend(friend: FriendModel) {
+  addFriend(friend: NewFriendModel) {
     return this.http.put(environment.apiBaseUrl + `/addfriend/${friend._id}`, {
-      fullName: friend.fullName
+      fullName: friend.fullName,
+      email: friend.email,
+      password: friend.password
     });
   }
 

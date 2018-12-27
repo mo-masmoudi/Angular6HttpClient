@@ -77,187 +77,229 @@
   </tbody>
 </table>
 <div id="updateFormDetails">
-<div class="wrapper" *ngIf="update">
-  <div id="formContent">
-    <h2
-      class="underlineHover"
-      routerLink="/userprofile"
-      routerLinkActive="active"
-    >
-      Update Details
-    </h2>
-    <form
-      #modifyForm="ngForm"
-      (ngSubmit)="modifyForm.valid && onSubmit(modifyForm)"
-    >
-      <input
-        type="hidden"
-        name="_id"
-        #_id="ngModel"
-        [(ngModel)]="userService.modifiedUser._id"
-      />
-      <input
-        type="text"
-        #fullName="ngModel"
-        [(ngModel)]="userService.modifiedUser.fullName"
-        name="fullName"
-        placeholder="Full Name"
-        required
-        [ngClass]="{
-          'invalid-textbox': modifyForm.submitted && !fullName.valid
-        }"
-      />
-      <div *ngIf="modifyForm.submitted && !fullName.valid">
-        <label class="validation-message">This field is required.</label>
-      </div>
-      <input
-        type="text"
-        #email="ngModel"
-        [(ngModel)]="userService.modifiedUser.email"
-        name="email"
-        placeholder="Email"
-        required
-        [pattern]="emailRegex"
-        [ngClass]="{ 'invalid-textbox': modifyForm.submitted && !email.valid }"
-      />
-      <div *ngIf="modifyForm.submitted && email.errors">
-        <label *ngIf="email.errors.required" class="validation-message"
-          >This field is required.</label
-        >
-        <label *ngIf="email.errors.pattern" class="validation-message"
-          >Invalid email address.</label
-        >
-      </div>
-      <input
-        type="text"
-        #age="ngModel"
-        [(ngModel)]="userService.modifiedUser.age"
-        name="age"
-        placeholder="Age"
-        required
-        [ngClass]="{ 'invalid-textbox': modifyForm.submitted && !age.valid }"
-      />
-      <div *ngIf="modifyForm.submitted && age.errors">
-        <label *ngIf="age.errors.required" class="validation-message"
-          >This field is required.</label
-        >
-        <label *ngIf="age.errors.pattern" class="validation-message"
-          >Invalid age.</label
-        >
-      </div>
+  <div class="wrapper" *ngIf="update">
+    <div id="formContent">
+      <h2
+        class="underlineHover"
+        routerLink="/userprofile"
+        routerLinkActive="active"
+      >
+        Update Details
+      </h2>
+      <form
+        #modifyForm="ngForm"
+        (ngSubmit)="modifyForm.valid && onSubmit(modifyForm)"
+      >
+        <input
+          type="hidden"
+          name="_id"
+          #_id="ngModel"
+          [(ngModel)]="userService.modifiedUser._id"
+        />
+        <input
+          type="text"
+          #fullName="ngModel"
+          [(ngModel)]="userService.modifiedUser.fullName"
+          name="fullName"
+          placeholder="Full Name"
+          required
+          [ngClass]="{
+            'invalid-textbox': modifyForm.submitted && !fullName.valid
+          }"
+        />
+        <div *ngIf="modifyForm.submitted && !fullName.valid">
+          <label class="validation-message">This field is required.</label>
+        </div>
+        <input
+          type="text"
+          #email="ngModel"
+          [(ngModel)]="userService.modifiedUser.email"
+          name="email"
+          placeholder="Email"
+          required
+          [pattern]="emailRegex"
+          [ngClass]="{
+            'invalid-textbox': modifyForm.submitted && !email.valid
+          }"
+        />
+        <div *ngIf="modifyForm.submitted && email.errors">
+          <label *ngIf="email.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="email.errors.pattern" class="validation-message"
+            >Invalid email address.</label
+          >
+        </div>
+        <input
+          type="text"
+          #age="ngModel"
+          [(ngModel)]="userService.modifiedUser.age"
+          name="age"
+          placeholder="Age"
+          required
+          [ngClass]="{ 'invalid-textbox': modifyForm.submitted && !age.valid }"
+        />
+        <div *ngIf="modifyForm.submitted && age.errors">
+          <label *ngIf="age.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="age.errors.pattern" class="validation-message"
+            >Invalid age.</label
+          >
+        </div>
 
-      <input
-        type="text"
-        #famille="ngModel"
-        [(ngModel)]="userService.modifiedUser.famille"
-        name="famille"
-        placeholder="Famille"
-        required
-        [ngClass]="{
-          'invalid-textbox': modifyForm.submitted && !famille.valid
-        }"
-      />
-      <div *ngIf="modifyForm.submitted && famille.errors">
-        <label *ngIf="famille.errors.required" class="validation-message"
-          >This field is required.</label
-        >
-        <label *ngIf="famille.errors.pattern" class="validation-message"
-          >Invalid family name.</label
-        >
-      </div>
-      <input
-        type="text"
-        #race="ngModel"
-        [(ngModel)]="userService.modifiedUser.race"
-        name="race"
-        placeholder="Race"
-        required
-        [ngClass]="{ 'invalid-textbox': modifyForm.submitted && !race.valid }"
-      />
-      <div *ngIf="modifyForm.submitted && race.errors">
-        <label *ngIf="race.errors.required" class="validation-message"
-          >This field is required.</label
-        >
-        <label *ngIf="race.errors.pattern" class="validation-message"
-          >Invalid race.</label
-        >
-      </div>
-      <input
-        type="text"
-        #nourriture="ngModel"
-        [(ngModel)]="userService.modifiedUser.nourriture"
-        name="nourriture"
-        placeholder="Food"
-        required
-        [ngClass]="{
-          'invalid-textbox': modifyForm.submitted && !nourriture.valid
-        }"
-      />
-      <div *ngIf="modifyForm.submitted && nourriture.errors">
-        <label *ngIf="nourriture.errors.required" class="validation-message"
-          >This field is required.</label
-        >
-        <label *ngIf="nourriture.errors.pattern" class="validation-message"
-          >Invalid food.</label
-        >
-      </div>
-      <input type="submit" value="Update" />
-    </form>
+        <input
+          type="text"
+          #famille="ngModel"
+          [(ngModel)]="userService.modifiedUser.famille"
+          name="famille"
+          placeholder="Famille"
+          required
+          [ngClass]="{
+            'invalid-textbox': modifyForm.submitted && !famille.valid
+          }"
+        />
+        <div *ngIf="modifyForm.submitted && famille.errors">
+          <label *ngIf="famille.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="famille.errors.pattern" class="validation-message"
+            >Invalid family name.</label
+          >
+        </div>
+        <input
+          type="text"
+          #race="ngModel"
+          [(ngModel)]="userService.modifiedUser.race"
+          name="race"
+          placeholder="Race"
+          required
+          [ngClass]="{ 'invalid-textbox': modifyForm.submitted && !race.valid }"
+        />
+        <div *ngIf="modifyForm.submitted && race.errors">
+          <label *ngIf="race.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="race.errors.pattern" class="validation-message"
+            >Invalid race.</label
+          >
+        </div>
+        <input
+          type="text"
+          #nourriture="ngModel"
+          [(ngModel)]="userService.modifiedUser.nourriture"
+          name="nourriture"
+          placeholder="Food"
+          required
+          [ngClass]="{
+            'invalid-textbox': modifyForm.submitted && !nourriture.valid
+          }"
+        />
+        <div *ngIf="modifyForm.submitted && nourriture.errors">
+          <label *ngIf="nourriture.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="nourriture.errors.pattern" class="validation-message"
+            >Invalid food.</label
+          >
+        </div>
+        <input type="submit" value="Update" />
+      </form>
 
-    <!-- Success message -->
-    <div class="success" *ngIf="showSucessMessage">Updated successfully</div>
+      <!-- Success message -->
+      <div class="success" *ngIf="showSucessMessage">Updated successfully</div>
 
-    <!-- Error message -->
-    <div class="alert" *ngIf="serverErrorMessages">
-      {{ serverErrorMessages }}
+      <!-- Error message -->
+      <div class="alert" *ngIf="serverErrorMessages">
+        {{ serverErrorMessages }}
+      </div>
     </div>
   </div>
-</div>
 </div>
 <div id="addFriendForm">
-<div class="wrapper" *ngIf="addFriend">
-  <div id="formContent">
-    <h2
-      class="underlineHover"
-      routerLink="/userprofile"
-      routerLinkActive="active"
-    >
-      Add Friend
-    </h2>
-    <form
-      #addFriendForm="ngForm"
-      (ngSubmit)="addFriendForm.valid && onAdd(addFriendForm)"
-    >
-      <input
-        type="hidden"
-        name="_id"
-        #_id="ngModel"
-        [(ngModel)]="userService.modifiedUser._id"
-      />
-      <input
-        type="text"
-        #fullName="ngModel"
-        [(ngModel)]="userService.newFriend"
-        name="fullName"
-        placeholder="Full Name"
-        required
-        [ngClass]="{
-          'invalid-textbox': addFriendForm.submitted && !fullName.valid
-        }"
-      />
-      <div *ngIf="addFriendForm.submitted && !fullName.valid">
-        <label class="validation-message">This field is required.</label>
+  <div class="wrapper" *ngIf="addFriend">
+    <div id="formContent">
+      <h2
+        class="underlineHover"
+        routerLink="/userprofile"
+        routerLinkActive="active"
+      >
+        Add Friend
+      </h2>
+      <form
+        #addFriendForm="ngForm"
+        (ngSubmit)="addFriendForm.valid && onAdd(addFriendForm)"
+      >
+        <input
+          type="hidden"
+          name="_id"
+          #_id="ngModel"
+          [(ngModel)]="userService.modifiedUser._id"
+        />
+        <input
+          type="text"
+          #fullName="ngModel"
+          [(ngModel)]="userService.newFriendModel.fullName"
+          name="fullName"
+          placeholder="Full Name"
+          required
+          [ngClass]="{
+            'invalid-textbox': addFriendForm.submitted && !fullName.valid
+          }"
+        />
+        <div *ngIf="addFriendForm.submitted && !fullName.valid">
+          <label class="validation-message">This field is required.</label>
+        </div>
+        <!------------------------------------------------------------------------------>
+        <input
+          type="text"
+          #email="ngModel"
+          [(ngModel)]="userService.newFriendModel.email"
+          name="email"
+          placeholder="Email"
+          [pattern]="emailRegex"
+          [ngClass]="{
+            'invalid-textbox': addFriendForm.submitted && !email.valid
+          }"
+        />
+        <div *ngIf="addFriendForm.submitted && email.errors">
+          <label *ngIf="email.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="email.errors.pattern" class="validation-message"
+            >Invalid email address.</label
+          >
+        </div>
+        <input
+          type="password"
+          #password="ngModel"
+          [(ngModel)]="userService.newFriendModel.password"
+          name="password"
+          placeholder="Password"
+          minlength="4"
+          [ngClass]="{
+            'invalid-textbox': addFriendForm.submitted && !password.valid
+          }"
+        />
+        <div *ngIf="addFriendForm.submitted && password.errors">
+          <label *ngIf="password.errors.required" class="validation-message"
+            >This field is required.</label
+          >
+          <label *ngIf="password.errors.minlength" class="validation-message"
+            >Enter atleast 4 characters.</label
+          >
+        </div>
+        <!-------------------------------------------------------------------------------->
+        <input type="submit" value="Add Friend" />
+      </form>
+
+      <!-- Success message -->
+      <div class="success" *ngIf="showSucessMessage">Added successfully</div>
+
+      <!-- Error message -->
+      <div class="alert" *ngIf="serverErrorMessages">
+        {{ serverErrorMessages }}
       </div>
-      <input type="submit" value="Add Friend" />
-    </form>
-
-    <!-- Success message -->
-    <div class="success" *ngIf="showSucessMessage">Added successfully</div>
-
-    <!-- Error message -->
-    <div class="alert" *ngIf="serverErrorMessages">
-      {{ serverErrorMessages }}
     </div>
   </div>
-</div>
 </div>

@@ -99,7 +99,9 @@ export class UserProfileComponent implements OnInit {
       res => {
         setTimeout(() => (this.showSucessMessage = false), 4000);
         this.addFriend = false;
-        this.userService.newFriend = "";
+        this.userService.newFriendModel.fullName = "";
+        this.userService.newFriendModel.email = "";
+        this.userService.newFriendModel.password = "";
         this.friendsObject.push({ fullName: form.value.fullName });
         M.toast({ html: "Friend added successfully", classes: "rounded" });
       },
